@@ -4,7 +4,7 @@ setup(
     name="pythonanywhere_client",
     version = "0.0.1",
     packages = ["pythonanywhere_client"],
-    description = "This is a backup project of the pythonanywhere server.",
+    description = "This is the python client of the pythonanywhere server",
     author = "Hakan Çelik",
     author_email = "hakancelik96@outlook.com",
     url = "https://github.com/hakancelik96/pythonanywhere-python-client",
