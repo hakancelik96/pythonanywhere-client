@@ -1,3 +1,3 @@
-# pythonanywhere-python-client
+# pythonanywhere-client
 
-[The PythonAnywhere API (beta)](https://help.pythonanywhere.com/pages/API/)
+[pythonanywhere-client topic on coogger](https://www.coogger.com/pythonanywhere_client/@hakancelik96/)

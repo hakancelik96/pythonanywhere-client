@@ -30,7 +30,7 @@ class ShareWithYou:
         return self.client._get(op="consoles", name="shared_with_you")
 
 
-class Id:
+class ConsoleId:
 
     def __init__(self, client, id):
         self.client = client

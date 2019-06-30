@@ -19,7 +19,7 @@ class Schedule:
         return self.client._post(op="schedule", data=payload)
 
 
-class Id:
+class ScheduleId:
 
     def __init__(self, id):
         self.id = id

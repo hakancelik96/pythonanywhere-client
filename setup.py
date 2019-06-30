@@ -1,13 +1,13 @@
 from setuptools import setup
 
 setup(
-    name="pythonanywhere_client",
+    name="pythonanywhere-client",
     version = "0.0.1",
     packages = ["pythonanywhere_client"],
     description = "This is the python client of the pythonanywhere server",
     author = "Hakan Çelik",
     author_email = "hakancelik96@outlook.com",
-    url = "https://github.com/hakancelik96/pythonanywhere-python-client",
+    url = "https://github.com/hakancelik96/pythonanywhere-client",
     python_requires='>=3.5.0',
     py_modules=[],
     include_package_data = True,
