@@ -2,49 +2,37 @@
 import requests
 
 class Client:
+    base_uri = "https://www.pythonanywhere.com"
 
     def __init__(self, username, token):
+        self.username = username
         self.headers = dict(
             Authorization=f"Token {token}"
         )
 
-    def _get(self):
-        return requests.get(
-            self.api_uri,
-            headers=self.headers
-        )
+    def _create_api_uri(self, op, name, path, api_version="v0"):
+        return f"{self.base_uri}/api/{api_version}/user/{self.username}/{op}/{name}/{path}"
 
-    def _post(self, **kwargs):
-        return requests.post(
-            self.api_uri,
+    def _requests(self, method, op, name, path, data=dict()):
+        uri = self._create_api_uri(op, name, path)
+        return getattr(requests, method)(
+            uri,
+            timeout=10,
             headers=self.headers,
-            data=kwargs
+            data=data
         )
 
-    def _put(self, **kwargs):
-        return requests.put(
-            self.api_uri,
-            headers=self.headers,
-            data=kwargs
-        )
+    def _get(self, op, name="", path=""):
+        return self._requests("get", op, name, path)
 
-    def _patch(self, **kwargs):
-        return requests.patch(
-            self.api_uri,
-            headers=self.headers,
-            data=kwargs
-        )
+    def _post(self, op, name="", path="", data=dict()):
+        return self._requests("post", op, name, path, data)
 
-    def _delete(self):
-        return requests.delete(
-            self.api_uri,
-            headers=self.headers
-        )
+    def _put(self, op, name="", path="", data=dict()):
+        return self._requests("put", op, name, path, data)
 
+    def _patch(self, op, name="", path="", data=dict()):
+        return self._requests("patch", op, name, path, data)
 
-if __name__ == "__main__":
-    client = Client(
-        username="coogger",
-        token="cece7010f9ff2c6d0cfd831f25a9c90938ec6698"
-    )
-    print(client.)
+    def _delete(self, op, name="", path=""):
+        return self._requests("delete", op, name, path)
