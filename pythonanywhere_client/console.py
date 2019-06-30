@@ -5,10 +5,9 @@ from settings import BASE_URL
 from config import USERNAME
 
 # client
-from client import Common
+from client import Client
 
-
-class Console(Common):
+class Console(Client):
     api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/consoles/"
 
     def get(self):
@@ -27,7 +26,7 @@ class Console(Common):
         return super().post(**p)
 
 
-class ShareWithYou(Common):
+class ShareWithYou(Client):
     api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/consoles/shared_with_you/"
 
     def get(self):
@@ -36,7 +35,7 @@ class ShareWithYou(Common):
         return super().get()
 
 
-class Id(Common):
+class Id(Client):
 
     def __init__(self, id):
         self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/consoles/{id}/"
@@ -52,7 +51,7 @@ class Id(Common):
         return super().delete()
 
 
-class GetLatestOutput(Common):
+class GetLatestOutput(Client):
 
     def __init__(self, id):
         self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/consoles/{id}/get_latest_output/"
@@ -63,7 +62,7 @@ class GetLatestOutput(Common):
         return super().get()
 
 
-class SendInput(Common):
+class SendInput(Client):
 
     def __init__(self, id):
         self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/consoles/{id}/send_input/"
@@ -71,9 +70,9 @@ class SendInput(Common):
     def post(self, input):
         '"type" into the console. Add a "\n" for return.'
 
-        return super().post(data=input)
+        return super().post(input=input)
 
 
 if __name__ == "__main__":
     console = Console()
-    print(console.post(executable="python3.6").json())
+    print(console.post("python3.6").json())

@@ -5,11 +5,11 @@ from settings import BASE_URL
 from config import USERNAME
 
 # client
-from client import Common
+from client import Client
 
 
 
-class Path(Common):
+class Path(Client):
 
     def __init__(self, path):
         self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/files/path{path}"
@@ -40,7 +40,7 @@ class Path(Common):
         return super().delete()
 
 
-class Sharing(Common):
+class Sharing(Client):
 
 
     def __init__(self, path):
@@ -50,7 +50,7 @@ class Sharing(Common):
         "Start sharing a file. Returns 201 on success, or 200 if file was already shared."
 
         self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/files/sharing/"
-        return super().get(data=dict(path=self.path))
+        return super().post(path=self.path)
 
     def get(self):
         "Check sharing status for a path. Returns 404 if path not currently shared."

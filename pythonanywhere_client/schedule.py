@@ -5,11 +5,11 @@ from settings import BASE_URL
 from config import USERNAME
 
 # client
-from client import Common
+from client import Client
 
 
 
-class Schedule(Common):
+class Schedule(Client):
     api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/schedule/"
 
     def get(self):
@@ -28,7 +28,7 @@ class Schedule(Common):
         return super().post(**p)
 
 
-class Id(Common):
+class Id(Client):
 
     def __init__(self, id):
         self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/schedule/{id}/"
