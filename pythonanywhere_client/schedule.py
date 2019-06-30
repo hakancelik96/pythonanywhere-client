@@ -1,21 +1,12 @@
-# settings
-from settings import BASE_URL
+class Schedule:
 
-# config
-from config import USERNAME
-
-# client
-from client import Client
-
-
-
-class Schedule(Client):
-    api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/schedule/"
+    def __init__(self, client):
+        self.client = client
 
     def get(self):
         "List all of your scheduled tasks"
 
-        return super().get()
+        return self.client._get(op="schedule")
 
     def post(self, command, enabled=True, interval="daily", hour=20, minute=0):
         """
@@ -23,42 +14,46 @@ class Schedule(Client):
         command: 'python3.6 { path }'
         """
 
-        p = locals()
-        del p["self"]
-        return super().post(**p)
+        payload = locals()
+        del payload["self"]
+        return self.client._post(op="schedule", data=payload)
 
 
-class Id(Client):
+class Id:
 
     def __init__(self, id):
-        self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/schedule/{id}/"
+        self.id = id
 
     def get(self):
         "Return information about a scheduled task."
 
-        return super().get()
+        return self.client._get(op="schedule", name=self.id)
 
     def put(self, command, enabled=True, interval="daily", hour=20, minute=0):
         "Endpoints for scheduled tasks"
 
-        p = locals()
-        del p["self"]
-        return super().put(**p)
+        payload = locals()
+        del payload["self"]
+        return self.client._put(op="schedule", name=self.id, data=payload)
 
     def patch(self, command, enabled=True, interval="daily", hour=20, minute=0):
         "Endpoints for scheduled tasks"
 
         p = locals()
         del p["self"]
-        return super().patch(**p)
+        return self.client._patch(op="schedule", name=self.id, data=payload)
 
     def delete(self):
         "Delete an scheduled task"
 
-        return super().delete()
-
+        return self.client._delete(op="schedule", name=self.id)
 
 
 if __name__ == "__main__":
-    s = Schedule()
-    print(s.post(command="python3.6 /home/coogger/trade_follow/trade_follow/trade_follow.py").json())
+    from client import Client
+    client = Client(
+        username="username",
+        token="token"
+    )
+    schedule = Schedule(client=client)
+    print(schedule.post(command="python3.6 /home/{username}/{file_path}").json())

@@ -1,20 +1,12 @@
-# settings
-from settings import BASE_URL
+class Webapps:
 
-# config
-from config import USERNAME
-
-# client
-from client import Client
-
-
-class Webapps(Client):
-    api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/webapps/"
+    def __init__(self, client):
+        self.client = client
 
     def get(self):
         "List all webapps"
 
-        return super().get()
+        return self.client._get(op="webapps")
 
     def post(self, domain_name, python_version):
         """
@@ -22,34 +14,35 @@ class Webapps(Client):
         Use (for example) "python36" to specify Python 3.6.
         """
 
-        p = locals()
-        del p["self"]
-        return super().post(**p)
+        payload= locals()
+        del payload["self"]
+        return self.client._post(op="webapps", data=payload)
 
 
-class DomaiName(Client):
+class DomaiName:
 
-    def __init__(self, domain_name):
-        self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/webapps/{domain_name}/"
+    def __init__(self, client, domain_name):
+        self.client = client
+        self.domain_name = domain_name
 
     def get(self):
         "Return information about a web app's configuration"
 
-        return super().get()
+        return self.client._get(op="webapps", name=self.domain_name)
 
     def put(self, python_version, source_directory, virtualenv_path, force_https):
         "Modify configuration of a web app. (NB a reload is usually required to apply changes)."
 
-        p = locals()
-        del p["self"]
-        return super().put(**p)
+        payload = locals()
+        del payload["self"]
+        return self.client._put(op="webapps", name=self.domain_name, data=payload)
 
     def patch(self, python_version, source_directory, virtualenv_path, force_https):
         "Modify configuration of a web app. (NB a reload is usually required to apply changes)."
 
-        p = locals()
-        del p["self"]
-        return super().patch(**p)
+        payload = locals()
+        del payload["self"]
+        return self.client._patch(op="webapps", name=self.domain_name, data=payload)
 
     def delete(self):
         """
@@ -57,24 +50,26 @@ class DomaiName(Client):
         Config is backed up in /var/www, and your code is not touched.
         """
 
-        return super().delete()
+        return self.client._delete(op="webapps", name=self.domain_name)
 
 
-class Reload(Client):
+class Reload:
 
-    def __init__(self, domain_name):
-        self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/webapps/{domain_name}/reload/"
+    def __init__(self, client, domain_name):
+        self.client = client
+        self.domain_name = domain_name
 
     def post(self):
         "Reload the webapp to reflect changes to configuration and/or source code on disk."
 
-        return super().post()
+        return self.client._post(op="webapps", name=self.domain_name, path="reload")
 
 
-class Ssl(Client):
+class Ssl:
 
-    def __init__(self, domain_name):
-        self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/webapps/{domain_name}/ssl/"
+    def __init__(self, client, domain_name):
+        self.client = client
+        self.domain_name = domain_name
 
     def get(self):
         """
@@ -82,7 +77,7 @@ class Ssl(Client):
         use `cert` and `private_key` when posting.
         """
 
-        return super().get()
+        return self.client._get(op="webapps", name=self.domain_name, path="ssl")
 
     def post(self, python_version, source_directory, virtualenv_path, force_https):
         """
@@ -90,9 +85,14 @@ class Ssl(Client):
         use `cert` and `private_key` when posting.
         """
 
-        p = locals()
-        del p["self"]
-        return super().post(**p)
+        payload = locals()
+        del payload["self"]
+        return self.client._post(
+            op="webapps",
+            name=self.domain_name,
+            path="ssl",
+            data=payload
+        )
 
     def delete(self):
         """
@@ -100,51 +100,78 @@ class Ssl(Client):
         use `cert` and `private_key` when posting.
         """
 
-        return super().delete(**p)
+        return self.client._delete(op="webapps", name=self.domain_name, path="ssl")
 
 
-class StaticFiles(Client):
+class StaticFiles:
 
-    def __init__(self, domain_name):
-        self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/webapps/{domain_name}/static_files/"
+    def __init__(self, client, domain_name):
+        self.client = client
+        self.domain_name = domain_name
 
     def get(self):
         "List all the static files mappings for a domain."
 
-        return super().get()
+        return self.client._get(op="webapps", name=self.domain_name, path="static_files")
 
     def post(self, url, path):
         "Create a new static files mapping. (webapp restart required)"
 
-        p = locals()
-        del p["self"]
-        return super().post(**p)
+        payload = locals()
+        del payload["self"]
+        return self.client._post(
+            op="webapps",
+            name=self.domain_name,
+            path="static_files",
+            data=payload
+        )
 
-class StaticFilesId(Client):
 
-    def __init__(self, domain_name, id):
-        self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/webapps/{domain_name}/static_files/{id}/"
+class StaticFilesId:
+
+    def __init__(self, client, domain_name, id):
+        self.client = client
+        self.domain_name = domain_name
+        self.id = id
 
     def get(self):
         "Get URL and path of a particular mapping."
 
-        return super().get()
+        return self.client._get(
+            op="webapps",
+            name=self.domain_name,
+            path=f"static_files/{id}"
+        )
 
     def put(self, url, path):
         "Modify a static files mapping. (webapp restart required)"
 
-        p = locals()
-        del p["self"]
-        return super().put(**p)
+        payload = locals()
+        del payload["self"]
+        return self.client._put(
+            op="webapps",
+            name=self.domain_name,
+            path=f"static_files/{id}",
+            data=payload
+        )
 
     def patch(self, url, path):
         "Modify a static files mapping. (webapp restart required)"
 
-        p = locals()
-        del p["self"]
-        return super().patch(**p)
+        payload = locals()
+        del payload["self"]
+        return self.client._patch(
+            op="webapps",
+            name=self.domain_name,
+            path=f"static_files/{id}",
+            data=payload
+        )
 
     def delete(self):
         "Remove a static files mapping. (webapp restart required)"
 
-        return super().delete()
+        return self.client._delete(
+            op="webapps",
+            name=self.domain_name, 
+            path=f"static_files/{id}"
+        )

@@ -1,19 +1,12 @@
-# settings
-from settings import BASE_URL
+class Console:
 
-# config
-from config import USERNAME
-
-# client
-from client import Client
-
-class Console(Client):
-    api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/consoles/"
+    def __init__(self, client):
+        self.client = client
 
     def get(self):
         "List all your consoles"
 
-        return super().get()
+        return self.client._get(op="consoles")
 
     def post(self, executable="bash", arguments="", working_directory=None):
         """
@@ -21,58 +14,80 @@ class Console(Client):
         Only connecting to the console in a browser will do that).
         """
 
-        p = locals()
-        del p["self"]
-        return super().post(**p)
+        payload = locals()
+        del payload["self"]
+        return self.client._post(op="consoles", data=payload)
 
 
-class ShareWithYou(Client):
-    api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/consoles/shared_with_you/"
+class ShareWithYou:
+
+    def __init__(self, client):
+        self.client = client
 
     def get(self):
         "View consoles shared with you."
 
-        return super().get()
+        return self.client._get(op="consoles", name="shared_with_you")
 
 
-class Id(Client):
+class Id:
 
-    def __init__(self, id):
-        self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/consoles/{id}/"
+    def __init__(self, client, id):
+        self.client = client
+        self.id = id
 
     def get(self):
         "Return information about a console instance."
 
-        return super().get()
+        return self.client._get(op="consoles", name=id)
 
     def delete(self):
         "Kill a console."
 
-        return super().delete()
+        return self.client._delete(op="consoles", name=id)
 
 
-class GetLatestOutput(Client):
+class GetLatestOutput:
 
-    def __init__(self, id):
-        self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/consoles/{id}/get_latest_output/"
+    def __init__(self, client, id):
+        self.client = client
+        self.id = id
 
     def get(self):
         "Get the most recent output from the console (approximately 500 characters)."
 
-        return super().get()
+        return self.client._get(
+            op="consoles",
+            name=f"{self.id}",
+            path="get_latest_output"
+        )
 
 
-class SendInput(Client):
+class SendInput:
 
-    def __init__(self, id):
-        self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/consoles/{id}/send_input/"
+    def __init__(self, client, id):
+        self.client = client
+        self.id = id
 
     def post(self, input):
         '"type" into the console. Add a "\n" for return.'
 
-        return super().post(input=input)
+        payload = locals()
+        del payload["self"]
+        return self.client._post(
+            op="consoles",
+            name=f"{self.id}",
+            path="send_input",
+            data=payload
+        )
+
 
 
 if __name__ == "__main__":
-    console = Console()
-    print(console.post("python3.6").json())
+    from client import Client
+    client = Client(
+        username="username",
+        token="token"
+    )
+    console = Console(client)
+    print(console.get().json())
