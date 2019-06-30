@@ -1,12 +1,12 @@
-# python
-import requests
-import inspect
-
 # settings
 from settings import BASE_URL
 
 # config
-from config import USERNAME, TOKEN, Common
+from config import USERNAME
+
+# client
+from client import Common
+
 
 
 class Path(Common):
@@ -17,7 +17,7 @@ class Path(Common):
     def get(self):
         "Downloads the file at the specified path."
 
-        return requests.get(self.api_uri, headers=self.headers)
+        return super().get()
 
     def post(self):
         """
@@ -28,7 +28,7 @@ class Path(Common):
         Returns 201 on success if a file has been created, or 200 if an existing file has been updated.
         """
 
-        return requests.post(self.api_uri, headers=self.headers)
+        return super().post()
 
     def delete(self):
         """
@@ -37,7 +37,7 @@ class Path(Common):
         Returns 204 on success.
         """
 
-        return requests.delete(self.api_uri, headers=self.headers)
+        return super().delete()
 
 
 class Sharing(Common):
@@ -49,20 +49,20 @@ class Sharing(Common):
     def post(self):
         "Start sharing a file. Returns 201 on success, or 200 if file was already shared."
 
-        api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/files/sharing/"
-        return requests.post(api_uri, headers=self.headers, data=dict(path=self.path))
+        self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/files/sharing/"
+        return super().get(data=dict(path=self.path))
 
     def get(self):
         "Check sharing status for a path. Returns 404 if path not currently shared."
 
-        api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/files/sharing/?path={self.path}"
-        return requests.get(api_uri, headers=self.headers)
+        self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/files/sharing/?path={self.path}"
+        return super().get()
 
     def delete(self):
         "Stop sharing a path. Returns 204 on successful unshare."
 
-        api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/files/sharing/?path={self.path}"
-        return requests.delete(api_uri, headers=self.headers)
+        self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/files/sharing/?path={self.path}"
+        return super().delete()
 
     def get_contents(self):
         """
@@ -70,10 +70,10 @@ class Sharing(Common):
         Paths ending in slash/ represent directories. Limited to 1000 results.
         """
 
-        api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/files/tree/?path={self.path}"
-        return requests.get(api_uri, headers=self.headers)
+        self.api_uri = f"{BASE_URL}/api/v0/user/{USERNAME}/files/tree/?path={self.path}"
+        return super().get()
 
 
 if __name__ == "__main__":
-    console = Sharing(path=f"/home/{USERNAME}")
-    print(console.get_contents().json())
+    console = Path(path=f"/home/{USERNAME}")
+    print(console.get().text)

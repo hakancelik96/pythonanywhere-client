@@ -1,12 +1,11 @@
-# python
-import requests
-import inspect
-
 # settings
 from settings import BASE_URL
 
 # config
-from config import USERNAME, TOKEN, Common
+from config import USERNAME
+
+# client
+from client import Common
 
 
 class Console(Common):
@@ -15,22 +14,17 @@ class Console(Common):
     def get(self):
         "List all your consoles"
 
-        return requests.get(self.api_uri, headers=self.headers)
+        return super().get()
 
     def post(self, executable="bash", arguments="", working_directory=None):
         """
         Create a new console object (NB does not actually start the process.
         Only connecting to the console in a browser will do that).
         """
-        data = dict()
-        # set data
-        frame = inspect.currentframe()
-        args, _, _, values = inspect.getargvalues(frame)
-        for i in args:
-            if i == "self":
-                continue
-            data[i] = values[i]
-        return requests.post(self.api_uri, headers=self.headers, data=data)
+
+        p = locals()
+        del p["self"]
+        return super().post(**p)
 
 
 class ShareWithYou(Common):
@@ -39,7 +33,7 @@ class ShareWithYou(Common):
     def get(self):
         "View consoles shared with you."
 
-        return requests.get(self.api_uri, headers=self.headers)
+        return super().get()
 
 
 class Id(Common):
@@ -50,12 +44,12 @@ class Id(Common):
     def get(self):
         "Return information about a console instance."
 
-        return requests.get(self.api_uri, headers=self.headers)
+        return super().get()
 
-    def kill(self):
+    def delete(self):
         "Kill a console."
 
-        return requests.delete(self.api_uri, headers=self.headers)
+        return super().delete()
 
 
 class GetLatestOutput(Common):
@@ -66,7 +60,7 @@ class GetLatestOutput(Common):
     def get(self):
         "Get the most recent output from the console (approximately 500 characters)."
 
-        return requests.get(self.api_uri, headers=self.headers)
+        return super().get()
 
 
 class SendInput(Common):
@@ -76,10 +70,10 @@ class SendInput(Common):
 
     def post(self, input):
         '"type" into the console. Add a "\n" for return.'
-        
-        return requests.post(self.api_uri, headers=self.headers, data=input)
+
+        return super().post(data=input)
 
 
 if __name__ == "__main__":
     console = Console()
-    print(console.post(executable="python3.6", name="test").json())
+    print(console.post(executable="python3.6").json())
