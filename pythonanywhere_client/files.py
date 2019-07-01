@@ -2,12 +2,12 @@ class Path:
 
     def __init__(self, client, path):
         self.client = client
-        self.path
+        self.path = path
 
     def get(self):
         "Downloads the file at the specified path."
 
-        return self.client._get(op="files", name=f"path{path}")
+        return self.client._get(op="files", name=f"path{self.path}")
 
     def post(self):
         """
@@ -18,7 +18,7 @@ class Path:
         Returns 201 on success if a file has been created, or 200 if an existing file has been updated.
         """
 
-        return self.client._post(op="files", name=f"path{path}")
+        return self.client._post(op="files", name=f"path{self.path}")
 
     def delete(self):
         """
@@ -27,7 +27,7 @@ class Path:
         Returns 204 on success.
         """
 
-        return self.client._delete(op="files", name=f"path{path}")
+        return self.client._delete(op="files", name=f"path{self.path}")
 
 
 class Sharing:
