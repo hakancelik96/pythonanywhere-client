@@ -27,7 +27,10 @@ def get_variable(obj, text):
     regex = r"{self\.(.*)}"
     matches = re.finditer(regex, text, re.DOTALL)
     for match in matches:
-        return getattr(obj, match.group(1))
+        match_text = text[match.span()[0]: match.span()[1]]
+        remove_match_text = text.replace(match_text, "")
+        variable = str(getattr(obj, match.group(1)))
+        return remove_match_text + variable
     return text
 
 def client_decorator(op, name="", path="", method=None):
