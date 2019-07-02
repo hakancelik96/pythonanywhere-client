@@ -1,22 +1,28 @@
+from client import client_decorator
+
 class Schedule:
 
     def __init__(self, client):
         self.client = client
 
+    @client_decorator(op="schedule")
     def get(self):
         "List all of your scheduled tasks"
 
-        return self.client._get(op="schedule")
-
+    @client_decorator(op="schedule")
     def post(self, command, enabled=True, interval="daily", hour=20, minute=0):
         """
         Create a new scheduled task
         command: 'python3.6 { path }'
         """
 
-        payload = locals()
-        del payload["self"]
-        return self.client._post(op="schedule", data=payload)
+        return dict(
+            command=command,
+            enabled=enabled,
+            interval=interval,
+            hour=hour,
+            minute=minute
+        )
 
 
 class ScheduleId:
@@ -24,29 +30,37 @@ class ScheduleId:
     def __init__(self, id):
         self.id = id
 
+    @client_decorator(op="schedule", name="{self.id}")
     def get(self):
         "Return information about a scheduled task."
 
-        return self.client._get(op="schedule", name=self.id)
-
+    @client_decorator(op="schedule", name="{self.id}")
     def put(self, command, enabled=True, interval="daily", hour=20, minute=0):
         "Endpoints for scheduled tasks"
 
-        payload = locals()
-        del payload["self"]
-        return self.client._put(op="schedule", name=self.id, data=payload)
+        return dict(
+            command=command,
+            enabled=enabled,
+            interval=interval,
+            hour=hour,
+            minute=minute
+        )
 
+    @client_decorator(op="schedule", name="{self.id}")
     def patch(self, command, enabled=True, interval="daily", hour=20, minute=0):
         "Endpoints for scheduled tasks"
 
-        p = locals()
-        del p["self"]
-        return self.client._patch(op="schedule", name=self.id, data=payload)
+        return dict(
+            command=command,
+            enabled=enabled,
+            interval=interval,
+            hour=hour,
+            minute=minute
+        )
 
+    @client_decorator(op="schedule", name="{self.id}")
     def delete(self):
         "Delete an scheduled task"
-
-        return self.client._delete(op="schedule", name=self.id)
 
 
 if __name__ == "__main__":

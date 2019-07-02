@@ -1,22 +1,25 @@
+from client import client_decorator
+
 class Console:
 
     def __init__(self, client):
         self.client = client
 
+    @client_decorator(op="consoles")
     def get(self):
         "List all your consoles"
 
-        return self.client._get(op="consoles")
-
+    @client_decorator(op="consoles")
     def post(self, executable="bash", arguments="", working_directory=None):
         """
         Create a new console object (NB does not actually start the process.
         Only connecting to the console in a browser will do that).
         """
-
-        payload = locals()
-        del payload["self"]
-        return self.client._post(op="consoles", data=payload)
+        return dict(
+            executable=executable,
+            arguments=arguments,
+            working_directory=working_directory
+        )
 
 
 class ShareWithYou:
@@ -24,10 +27,9 @@ class ShareWithYou:
     def __init__(self, client):
         self.client = client
 
+    @client_decorator(op="consoles", name="shared_with_you")
     def get(self):
         "View consoles shared with you."
-
-        return self.client._get(op="consoles", name="shared_with_you")
 
 
 class ConsoleId:
@@ -36,15 +38,13 @@ class ConsoleId:
         self.client = client
         self.id = id
 
+    @client_decorator(op="consoles", name="{self.id}")
     def get(self):
         "Return information about a console instance."
 
-        return self.client._get(op="consoles", name=id)
-
+    @client_decorator(op="consoles", name="{self.id}")
     def delete(self):
         "Kill a console."
-
-        return self.client._delete(op="consoles", name=id)
 
 
 class GetLatestOutput:
@@ -53,14 +53,9 @@ class GetLatestOutput:
         self.client = client
         self.id = id
 
+    @client_decorator(op="consoles", name="{self.id}", path="get_latest_output")
     def get(self):
         "Get the most recent output from the console (approximately 500 characters)."
-
-        return self.client._get(
-            op="consoles",
-            name=f"{self.id}",
-            path="get_latest_output"
-        )
 
 
 class SendInput:
@@ -69,25 +64,19 @@ class SendInput:
         self.client = client
         self.id = id
 
+    @client_decorator(op="consoles", name="{self.id}", path="send_input")
     def post(self, input):
         '"type" into the console. Add a "\n" for return.'
 
-        payload = locals()
-        del payload["self"]
-        return self.client._post(
-            op="consoles",
-            name=f"{self.id}",
-            path="send_input",
-            data=payload
+        return dict(
+            input=input
         )
-
-
 
 if __name__ == "__main__":
     from client import Client
     client = Client(
-        username="username",
-        token="token"
+        username="coogger",
+        token="1d9d69e4a1a44d04c25dcbb385486e5cf7986361"
     )
-    console = Console(client)
-    print(console.get().json())
+    console = ConsoleId(client, 1)
+    print(console.get())
