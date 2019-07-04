@@ -44,8 +44,6 @@ class Sharing:
     def post(self):
         "Start sharing a file. Returns 201 on success, or 200 if file was already shared."
 
-        return dict(path=self.path)
-
     @client_decorator(op="files", name="sharing", path="?path={self.path}")
     def delete(self):
         "Stop sharing a path. Returns 204 on successful unshare."

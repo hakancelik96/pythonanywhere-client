@@ -16,11 +16,6 @@ class Webapps:
         Use (for example) "python36" to specify Python 3.6.
         """
 
-        return dict(
-            domain_name=domain_name,
-            python_version=python_version
-        )
-
 
 class DomaiName:
 
@@ -36,23 +31,9 @@ class DomaiName:
     def put(self, python_version, source_directory, virtualenv_path, force_https):
         "Modify configuration of a web app. (NB a reload is usually required to apply changes)."
 
-        return dict(
-            python_version=python_version,
-            source_directory=source_directory,
-            virtualenv_path=virtualenv_path,
-            force_https=force_https,
-        )
-
     @client_decorator(op="webapps", name="{self.domain_name}")
     def patch(self, python_version, source_directory, virtualenv_path, force_https):
         "Modify configuration of a web app. (NB a reload is usually required to apply changes)."
-
-        return dict(
-            python_version=python_version,
-            source_directory=source_directory,
-            virtualenv_path=virtualenv_path,
-            force_https=force_https,
-        )
 
     @client_decorator(op="webapps", name="{self.domain_name}")
     def delete(self):
@@ -93,13 +74,6 @@ class Ssl:
         use `cert` and `private_key` when posting.
         """
 
-        return dict(
-            python_version=python_version,
-            source_directory=source_directory,
-            virtualenv_path=virtualenv_path,
-            force_https=force_https,
-        )
-
     @client_decorator(op="webapps", name="{self.domain_name}", path="ssl")
     def delete(self):
         """
@@ -122,10 +96,6 @@ class StaticFiles:
     def post(self, url, path):
         "Create a new static files mapping. (webapp restart required)"
 
-        return dict(
-            url=url,
-            path=path
-        )
 
 class StaticFilesId:
 
@@ -142,19 +112,9 @@ class StaticFilesId:
     def put(self, url, path):
         "Modify a static files mapping. (webapp restart required)"
 
-        return dict(
-            url=url,
-            path=path
-        )
-
     @client_decorator(op="webapps", name="{self.domain_name}", path="static_files/{self.id}")
     def patch(self, url, path):
         "Modify a static files mapping. (webapp restart required)"
-
-        return dict(
-            url=url,
-            path=path
-        )
 
     @client_decorator(op="webapps", name="{self.domain_name}", path="static_files/{self.id}")
     def delete(self):

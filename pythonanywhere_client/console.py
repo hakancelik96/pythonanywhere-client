@@ -15,11 +15,6 @@ class Console:
         Create a new console object (NB does not actually start the process.
         Only connecting to the console in a browser will do that).
         """
-        return dict(
-            executable=executable,
-            arguments=arguments,
-            working_directory=working_directory
-        )
 
 
 class ShareWithYou:
@@ -68,15 +63,12 @@ class SendInput:
     def post(self, input):
         '"type" into the console. Add a "\n" for return.'
 
-        return dict(
-            input=input
-        )
 
 if __name__ == "__main__":
     from client import Client
     client = Client(
-        username="coogger",
-        token="1d9d69e4a1a44d04c25dcbb385486e5cf7986361"
+        username="",
+        token=""
     )
-    console = ConsoleId(client, 1)
-    print(console.get())
+    console = Console(client)
+    print(console.post())

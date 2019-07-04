@@ -3,9 +3,9 @@ from pythonanywhere_client.files import Path, Sharing
 
 import os
 
-username = "username"
-token = "token"
-project_name = "project_name"
+username = "coogger"
+token = "1d9d69e4a1a44d04c25dcbb385486e5cf7986361"
+project_name = "coogger"
 
 client = Client(
     username=username,
@@ -15,7 +15,7 @@ client = Client(
 path = f"/home/{username}/{project_name}/"
 
 valid_folder = [
-    f"{path}/media/images/",
+    # f"{path}/media/images/",
     f"{path}/db/",
 ]
 

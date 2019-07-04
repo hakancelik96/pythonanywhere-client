@@ -16,15 +16,6 @@ class Schedule:
         command: 'python3.6 { path }'
         """
 
-        return dict(
-            command=command,
-            enabled=enabled,
-            interval=interval,
-            hour=hour,
-            minute=minute
-        )
-
-
 class ScheduleId:
 
     def __init__(self, id):
@@ -38,25 +29,9 @@ class ScheduleId:
     def put(self, command, enabled=True, interval="daily", hour=20, minute=0):
         "Endpoints for scheduled tasks"
 
-        return dict(
-            command=command,
-            enabled=enabled,
-            interval=interval,
-            hour=hour,
-            minute=minute
-        )
-
     @client_decorator(op="schedule", name="{self.id}")
     def patch(self, command, enabled=True, interval="daily", hour=20, minute=0):
         "Endpoints for scheduled tasks"
-
-        return dict(
-            command=command,
-            enabled=enabled,
-            interval=interval,
-            hour=hour,
-            minute=minute
-        )
 
     @client_decorator(op="schedule", name="{self.id}")
     def delete(self):

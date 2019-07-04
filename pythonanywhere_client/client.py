@@ -1,6 +1,7 @@
 # python
 import requests
 import re
+import inspect
 
 class Client:
     base_uri = "https://www.pythonanywhere.com"
@@ -36,15 +37,15 @@ def get_variable(obj, text):
 def client_decorator(op, name="", path="", method=None):
     def client_f(func):
         def wraps(*args, **kwargs):
-            payload = func(*args, **kwargs)
-            obj = args[0]
-            name_parameter = get_variable(obj, name)
+            get_parameters = inspect.getcallargs(func, *args, **kwargs)
+            obj = get_parameters["self"]
+            del get_parameters["self"]
             return getattr(obj.client, f"_requests")(
                 method=method or func.__name__,
                 op=op,
-                name=name_parameter,
+                name=get_variable(obj, name),
                 path=path,
-                data=payload or dict()
+                data=get_parameters or dict()
             )
         return wraps
     return client_f
