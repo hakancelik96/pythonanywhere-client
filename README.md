@@ -11,4 +11,4 @@ PythonAnywhere is an online integrated development environment and web hosting s
 
 ## Pythonanywhere Client Library
 
-**pythonanywhere_client** is a python client of the pythonanywhere server developed based on the [pythonanywhere API document](https://help.pythonanywhere.com/pages/API/) made by [@hakancelik96](https://www.coogger.com/@hakancelik96)
+**pythonanywhere_client** is a python client of the pythonanywhere server developed based on the [pythonanywhere API document](https://help.pythonanywhere.com/pages/API/) made by [hakancelik96](https://github.com/hakancelik96/pythonanywhere-client)
