@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="pythonanywhere-client",
-    version="0.0.32",
+    version="0.0.4",
     packages=["pythonanywhere_client"],
     description="This is the python client of the pythonanywhere server",
     author="Hakan Çelik",
