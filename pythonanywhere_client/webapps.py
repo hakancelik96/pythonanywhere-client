@@ -1,7 +1,7 @@
-from client import client_decorator
+from .client import client_decorator
+
 
 class Webapps:
-
     def __init__(self, client):
         self.client = client
 
@@ -18,7 +18,6 @@ class Webapps:
 
 
 class DomaiName:
-
     def __init__(self, client, domain_name):
         self.client = client
         self.domain_name = domain_name
@@ -44,7 +43,6 @@ class DomaiName:
 
 
 class Reload:
-
     def __init__(self, client, domain_name):
         self.client = client
         self.domain_name = domain_name
@@ -55,7 +53,6 @@ class Reload:
 
 
 class Ssl:
-
     def __init__(self, client, domain_name):
         self.client = client
         self.domain_name = domain_name
@@ -83,7 +80,6 @@ class Ssl:
 
 
 class StaticFiles:
-
     def __init__(self, client, domain_name):
         self.client = client
         self.domain_name = domain_name
@@ -98,24 +94,31 @@ class StaticFiles:
 
 
 class StaticFilesId:
-
     def __init__(self, client, domain_name, id):
         self.client = client
         self.domain_name = domain_name
         self.id = id
 
-    @client_decorator(op="webapps", name="{self.domain_name}", path="static_files/{self.id}")
+    @client_decorator(
+        op="webapps", name="{self.domain_name}", path="static_files/{self.id}"
+    )
     def get(self):
         "Get URL and path of a particular mapping."
 
-    @client_decorator(op="webapps", name="{self.domain_name}", path="static_files/{self.id}")
+    @client_decorator(
+        op="webapps", name="{self.domain_name}", path="static_files/{self.id}"
+    )
     def put(self, url, path):
         "Modify a static files mapping. (webapp restart required)"
 
-    @client_decorator(op="webapps", name="{self.domain_name}", path="static_files/{self.id}")
+    @client_decorator(
+        op="webapps", name="{self.domain_name}", path="static_files/{self.id}"
+    )
     def patch(self, url, path):
         "Modify a static files mapping. (webapp restart required)"
 
-    @client_decorator(op="webapps", name="{self.domain_name}", path="static_files/{self.id}")
+    @client_decorator(
+        op="webapps", name="{self.domain_name}", path="static_files/{self.id}"
+    )
     def delete(self):
         "Remove a static files mapping. (webapp restart required)"

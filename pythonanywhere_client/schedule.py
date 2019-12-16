@@ -1,7 +1,7 @@
-from client import client_decorator
+from .client import client_decorator
+
 
 class Schedule:
-
     def __init__(self, client):
         self.client = client
 
@@ -16,8 +16,8 @@ class Schedule:
         command: 'python3.6 { path }'
         """
 
-class ScheduleId:
 
+class ScheduleId:
     def __init__(self, id):
         self.id = id
 
@@ -40,9 +40,7 @@ class ScheduleId:
 
 if __name__ == "__main__":
     from client import Client
-    client = Client(
-        username="username",
-        token="token"
-    )
+
+    client = Client(username="username", token="token")
     schedule = Schedule(client=client)
     print(schedule.post(command="python3.6 /home/{username}/{file_path}").json())

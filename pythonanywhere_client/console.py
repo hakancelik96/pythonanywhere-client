@@ -1,7 +1,7 @@
-from client import client_decorator
+from .client import client_decorator
+
 
 class Console:
-
     def __init__(self, client):
         self.client = client
 
@@ -18,7 +18,6 @@ class Console:
 
 
 class ShareWithYou:
-
     def __init__(self, client):
         self.client = client
 
@@ -28,7 +27,6 @@ class ShareWithYou:
 
 
 class ConsoleId:
-
     def __init__(self, client, id):
         self.client = client
         self.id = id
@@ -43,7 +41,6 @@ class ConsoleId:
 
 
 class GetLatestOutput:
-
     def __init__(self, client, id):
         self.client = client
         self.id = id
@@ -54,7 +51,6 @@ class GetLatestOutput:
 
 
 class SendInput:
-
     def __init__(self, client, id):
         self.client = client
         self.id = id
@@ -66,9 +62,7 @@ class SendInput:
 
 if __name__ == "__main__":
     from client import Client
-    client = Client(
-        username="",
-        token=""
-    )
+
+    client = Client(username="", token="")
     console = Console(client)
     print(console.post())

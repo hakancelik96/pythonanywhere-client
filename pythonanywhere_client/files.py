@@ -1,7 +1,7 @@
-from client import client_decorator
+from .client import client_decorator
+
 
 class Path:
-
     def __init__(self, client, path):
         self.client = client
         self.path = path
@@ -30,8 +30,6 @@ class Path:
 
 
 class Sharing:
-
-
     def __init__(self, client, path):
         self.client = client
         self.path = path
@@ -58,9 +56,7 @@ class Sharing:
 
 if __name__ == "__main__":
     from client import Client
-    client = Client(
-        username="username",
-        token="token"
-    )
+
+    client = Client(username="username", token="token")
     path = Path(client=client, path=f"/home/username")
     print(path.get().text)
