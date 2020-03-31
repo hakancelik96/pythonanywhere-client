@@ -1,7 +1,6 @@
 # An Example To Backup Specific Files From Pythonanywhere Server
 
-This example only backup files in `invalid_folder` list, The items in the invalid_folder list are the folder names where the databases and image files are located, so the following example was written to back up databases and image files.
-
+This example only backup files in `invalid_folder` list, The items in the invalid\_folder list are the folder names where the databases and image files are located, so the following example was written to back up databases and image files.
 
 ```python
 from pythonanywhere_client.client import Client
@@ -38,11 +37,15 @@ for folder in valid_folder:
             file.write(download_file)
 ```
 
-##### Line 28
+## Line 28
+
 Allows us to get files under the given folder path.
 
-##### Line 30
+## Line 30
+
 line and we took the data as a binary.
 
-##### Line 31
+## Line 31
+
 We opened the file in the binary format.
+
