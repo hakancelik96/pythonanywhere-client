@@ -441,7 +441,7 @@ Delete the webapp. This will take the site offline. Config is backed up in /var/
 >>> domain_name.delete()
 ```
 
-#### Reload Class
+### Reload Class
 
 **Parameters**
 
@@ -462,7 +462,7 @@ Reload the webapp to reflect changes to configuration and/or source code on disk
 >>> reload.post()
 ```
 
-#### Ssl Class
+### Ssl Class
 
 **Parameters**
 
@@ -499,7 +499,7 @@ Get and set TLS/HTTPS info. POST parameters to the right are incorrect use `cert
 >>> ssl.delete()
 ```
 
-#### StaticFiles Class
+### StaticFiles Class
 
 **Parameters**
 
@@ -528,7 +528,7 @@ Create a new static files mapping. \(webapp restart required\)
 >>> static_files.post(url: str, path: str)
 ```
 
-#### StaticFilesId Class
+### StaticFilesId Class
 
 **Parameters**
 
@@ -573,7 +573,7 @@ Remove a static files mapping. \(webapp restart required\)
 >>> static_files_id.delete()
 ```
 
-## Donate
+### Donate
 
 > If you like this work you can donate to me
 
