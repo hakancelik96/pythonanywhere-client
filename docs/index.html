@@ -13,6 +13,19 @@
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css" />
+    <style>
+      .app-nav {
+        position: relative;
+        z-index: 0;
+      }
+      .content {
+        padding-top: 20px;
+      }
+      .app-name img {
+        max-width: 50%;
+        border-radius: 8px;
+      }
+    </style>
   </head>
   <body>
     <div id="app"></div>
@@ -46,28 +59,8 @@
     <script src="https://unpkg.com/docsify-copy-code@2"></script>
     <!-- docsify-pagination -->
     <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
-    <!-- gitalk -->
-    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
-    <script>
-      const gitalk = new Gitalk({
-        clientID: "54ada458251554279c70",
-        clientSecret: "f3bc5187f93959858804e8444f6b5b64049d49fa",
-        repo: "hakancelik.dev",
-        owner: "hakancelik96",
-        admin: ["hakancelik96"],
-        distractionFreeMode: false
-      });
-      gitalk.render("gitalk-container");
-    </script>
-    <div id="gitalk-container" style="display: none;"></div>
     <!-- prism -->
     <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-html.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-sass.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-scss.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
   </body>
 </html>
