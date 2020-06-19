@@ -46,7 +46,9 @@ class Sharing:
     def delete(self):
         "Stop sharing a path. Returns 204 on successful unshare."
 
-    @client_decorator(op="files", name="tree", path="?path={self.path}", method="get")
+    @client_decorator(
+        op="files", name="tree", path="?path={self.path}", method="get"
+    )
     def get_contents(self):
         """
         Returns a list of the contents of a directory, and its subdirectories as a list.

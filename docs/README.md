@@ -1,7 +1,5 @@
 # Pythonanywhere Client
 
-**This is the python client of the pythonanywhere server**
-
 ![Lint](https://github.com/hakancelik96/pythonanywhere-client/workflows/Lint/badge.svg)
 
 [![Forks](https://img.shields.io/github/forks/hakancelik96/pythonanywhere-client)](https://github.com/hakancelik96/pythonanywhere-client/fork)
@@ -20,4 +18,16 @@
 
 [![Pepy](https://pepy.tech/badge/pythonanywhere-client)](https://pepy.tech/badge/pythonanywhere-client)
 
-For more information see: https://pythonanywhere-client.hakancelik.dev/
+## What is Pythonanywhere
+
+[PythonAnywhere](https://www.pythonanywhere.com/) is an online integrated development
+environment and web hosting service based on the Python programming language. Founded by
+Giles Thomas and Robert Smithson in 2012, it provides in-browser access to server-based
+Python and Bash command-line interfaces, along with a code editor with syntax
+highlighting - **Wikipedia**
+
+## Pythonanywhere Client Library
+
+**pythonanywhere_client** is a python client of the pythonanywhere server developed
+based on the [pythonanywhere API document](https://help.pythonanywhere.com/pages/API/)
+made by [hakancelik96](https://github.com/hakancelik96/pythonanywhere-client)

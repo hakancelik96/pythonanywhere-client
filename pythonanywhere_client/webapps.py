@@ -27,11 +27,15 @@ class DomaiName:
         "Return information about a web app's configuration"
 
     @client_decorator(op="webapps", name="{self.domain_name}")
-    def put(self, python_version, source_directory, virtualenv_path, force_https):
+    def put(
+        self, python_version, source_directory, virtualenv_path, force_https
+    ):
         "Modify configuration of a web app. (NB a reload is usually required to apply changes)."
 
     @client_decorator(op="webapps", name="{self.domain_name}")
-    def patch(self, python_version, source_directory, virtualenv_path, force_https):
+    def patch(
+        self, python_version, source_directory, virtualenv_path, force_https
+    ):
         "Modify configuration of a web app. (NB a reload is usually required to apply changes)."
 
     @client_decorator(op="webapps", name="{self.domain_name}")
@@ -65,7 +69,9 @@ class Ssl:
         """
 
     @client_decorator(op="webapps", name="{self.domain_name}", path="ssl")
-    def post(self, python_version, source_directory, virtualenv_path, force_https):
+    def post(
+        self, python_version, source_directory, virtualenv_path, force_https
+    ):
         """
         Get and set TLS/HTTPS info. POST parameters to the right are incorrect,
         use `cert` and `private_key` when posting.
@@ -84,11 +90,15 @@ class StaticFiles:
         self.client = client
         self.domain_name = domain_name
 
-    @client_decorator(op="webapps", name="{self.domain_name}", path="static_files")
+    @client_decorator(
+        op="webapps", name="{self.domain_name}", path="static_files"
+    )
     def get(self):
         "List all the static files mappings for a domain."
 
-    @client_decorator(op="webapps", name="{self.domain_name}", path="static_files")
+    @client_decorator(
+        op="webapps", name="{self.domain_name}", path="static_files"
+    )
     def post(self, url, path):
         "Create a new static files mapping. (webapp restart required)"
 

@@ -10,7 +10,8 @@ pip install pythonanywhere-client
 
 ### Client
 
-Client class purpose is to get your project username and token then send any requests to pythonanywhere API service.
+Client class purpose is to get your project username and token then send any requests to
+pythonanywhere API service.
 
 ```python
 from pythonanywhere_client.client import Client
@@ -23,9 +24,10 @@ client = Client(
 
 ### Where is My API Token ?
 
-Here, **https://www.pythonanywhere.com/user/{{ your\_username }}/account/\#api\_token**
+Here, **https://www.pythonanywhere.com/user/{{ your_username }}/account/\#api_token**
 
-Follow the [API documentation](https://help.pythonanywhere.com/pages/API/) to submit your requests with this library, its to easy.
+Follow the [API documentation](https://help.pythonanywhere.com/pages/API/) to submit
+your requests with this library, its to easy.
 
 ### Console
 
@@ -49,19 +51,20 @@ List all your consoles
 
 **Post function**
 
-Create a new console object \(NB does not actually start the process. Only connecting to the console in a browser will do that\).
+Create a new console object \(NB does not actually start the process. Only connecting to
+the console in a browser will do that\).
 
 **Parameters**
 
-* executable
-  * str
-  * default= 'bash'
-* arguments
-  * str
-  * default= ""
-* working\_directory
-  * str
-  * default = None
+- executable
+  - str
+  - default= 'bash'
+- arguments
+  - str
+  - default= ""
+- working_directory
+  - str
+  - default = None
 
 ```text
 >>> console.post()
@@ -85,9 +88,9 @@ View consoles shared with you.
 
 **Parameters**
 
-* id
-  * str
-  * your\_any\_console\_id
+- id
+  - str
+  - your_any_console_id
 
 ```python
 >>> console_id = ConsoleId(client=client, id: str)
@@ -113,9 +116,9 @@ Kill a console
 
 **Parameters**
 
-* id
-  * str
-  * your\_any\_console\_id
+- id
+  - str
+  - your_any_console_id
 
 ```python
 >>> get_lates_output = GetLatestOutput(client=client, id: str)
@@ -133,9 +136,9 @@ Get the most recent output from the console \(approximately 500 characters\).
 
 **Parameters**
 
-* id
-  * str
-  * your\_any\_console\_id
+- id
+  - str
+  - your_any_console_id
 
 ```python
 >>> send_input = SendInput(client=client, id: str)
@@ -147,9 +150,9 @@ Get the most recent output from the console \(approximately 500 characters\).
 
 **Parameters**
 
-* input
-  * str
-  * example: 'source myvenv/bin/activate\n'
+- input
+  - str
+  - example: 'source myvenv/bin/activate\n'
 
 ```python
 >>> send_input.post(input: str)
@@ -165,9 +168,9 @@ from pythonanywhere_client.files import Path, Sharing
 
 **Parameters**
 
-* client
-* path
-  * your\_any\_file\_or\_folder\_path
+- client
+- path
+  - your_any_file_or_folder_path
 
 ```python
 >>> path = Path(client=client, path: str)
@@ -183,7 +186,11 @@ Downloads the file at the specified path
 
 **Post function**
 
-Uploads a file to the specified file path. Contents should be in a multipart-encoded file with the name "content". The attached filename is ignored. If the directories in the given path do not exist, they will be created. Any file already present at the specified path will be overwritten. Returns 201 on success if a file has been created, or 200 if an existing file has been updated.
+Uploads a file to the specified file path. Contents should be in a multipart-encoded
+file with the name "content". The attached filename is ignored. If the directories in
+the given path do not exist, they will be created. Any file already present at the
+specified path will be overwritten. Returns 201 on success if a file has been created,
+or 200 if an existing file has been updated.
 
 ```python
 >>> path.post()
@@ -191,7 +198,8 @@ Uploads a file to the specified file path. Contents should be in a multipart-enc
 
 **Delete function**
 
-Deletes the file at the specified path. This method can be used to delete log files that are not longer required. Returns 204 on success.
+Deletes the file at the specified path. This method can be used to delete log files that
+are not longer required. Returns 204 on success.
 
 ```python
 >>> path.delete()
@@ -229,7 +237,8 @@ Stop sharing a path. Returns 204 on successful unshare.
 
 **Get Contents function**
 
-Returns a list of the contents of a directory, and its subdirectories as a list. Paths ending in slash/ represent directories. Limited to 1000 results.
+Returns a list of the contents of a directory, and its subdirectories as a list. Paths
+ending in slash/ represent directories. Limited to 1000 results.
 
 ```python
 >>> path.get_contents()
@@ -261,21 +270,21 @@ Create a new scheduled task
 
 **Parameters**
 
-* command
-  * str
-  * example: 'python3.6 { write\_your\_file\_path }'
-* enabled
-  * bool or str
-  * default: True
-* interval
-  * str
-  * default: "daily"
-* hour
-  * number, int, str, float
-  * defult: 20
-* minute
-  * number, int, str, float
-  * default: 0
+- command
+  - str
+  - example: 'python3.6 { write_your_file_path }'
+- enabled
+  - bool or str
+  - default: True
+- interval
+  - str
+  - default: "daily"
+- hour
+  - number, int, str, float
+  - defult: 20
+- minute
+  - number, int, str, float
+  - default: 0
 
 ```python
 >>> schedule.post(command: str)
@@ -285,9 +294,9 @@ Create a new scheduled task
 
 **Parameters**
 
-* client
-* id
-  * your\_task\_id
+- client
+- id
+  - your_task_id
 
 ```python
 >>> schedule_id = ScheduleId(client=client, id: str)
@@ -307,21 +316,21 @@ Endpoints for scheduled tasks
 
 **Parameters**
 
-* command
-  * str
-  * example: 'python3.6 { write\_your\_file\_path }'
-* enabled
-  * bool or str
-  * default: True
-* interval
-  * str
-  * default: "daily"
-* hour
-  * number, int, str, float
-  * defult: 20
-* minute
-  * number, int, str, float
-  * default: 0
+- command
+  - str
+  - example: 'python3.6 { write_your_file_path }'
+- enabled
+  - bool or str
+  - default: True
+- interval
+  - str
+  - default: "daily"
+- hour
+  - number, int, str, float
+  - defult: 20
+- minute
+  - number, int, str, float
+  - default: 0
 
 ```python
 >>> schedule_id.put(command: str)
@@ -333,21 +342,21 @@ Endpoints for scheduled tasks
 
 **Parameters**
 
-* command
-  * str
-  * example: 'python3.6 { write\_your\_file\_path }'
-* enabled
-  * bool or str
-  * default: True
-* interval
-  * str
-  * default: "daily"
-* hour
-  * number, int, str, float
-  * defult: 20
-* minute
-  * number, int, str, float
-  * default: 0
+- command
+  - str
+  - example: 'python3.6 { write_your_file_path }'
+- enabled
+  - bool or str
+  - default: True
+- interval
+  - str
+  - default: "daily"
+- hour
+  - number, int, str, float
+  - defult: 20
+- minute
+  - number, int, str, float
+  - default: 0
 
 ```python
 >>> schedule_id.patch(command: str)
@@ -383,14 +392,15 @@ List all webapps
 
 **Post function**
 
-Create a new webapp with manual configuration. Use \(for example\) "python36" to specify Python 3.6.
+Create a new webapp with manual configuration. Use \(for example\) "python36" to specify
+Python 3.6.
 
 **Parameters**
 
-* domain\_name
-  * str
-* python\_version
-  * str
+- domain_name
+  - str
+- python_version
+  - str
 
 ```python
 >>> web_apps.post(domain_name: str, python_version: str)
@@ -400,10 +410,10 @@ Create a new webapp with manual configuration. Use \(for example\) "python36" to
 
 **Parameters**
 
-* client
-* domain\_name
-  * str
-  * example: 'www.coogger.com'
+- client
+- domain_name
+  - str
+  - example: 'www.coogger.com'
 
 ```python
 >>> domain_name = DomaiName(client=client, domain_name: str)
@@ -435,7 +445,8 @@ Modify configuration of a web app. \(NB a reload is usually required to apply ch
 
 **Delete function**
 
-Delete the webapp. This will take the site offline. Config is backed up in /var/www, and your code is not touched.
+Delete the webapp. This will take the site offline. Config is backed up in /var/www, and
+your code is not touched.
 
 ```python
 >>> domain_name.delete()
@@ -445,10 +456,10 @@ Delete the webapp. This will take the site offline. Config is backed up in /var/
 
 **Parameters**
 
-* client
-* domain\_name
-  * str
-  * example: 'www.coogger.com'
+- client
+- domain_name
+  - str
+  - example: 'www.coogger.com'
 
 ```python
 >>> reload = Reload(client=client, domain_name: str)
@@ -466,10 +477,10 @@ Reload the webapp to reflect changes to configuration and/or source code on disk
 
 **Parameters**
 
-* client
-* domain\_name
-  * str
-  * example: 'www.coogger.com'
+- client
+- domain_name
+  - str
+  - example: 'www.coogger.com'
 
 ```python
 >>> ssl = Ssl(client=client, domain_name: str)
@@ -477,7 +488,8 @@ Reload the webapp to reflect changes to configuration and/or source code on disk
 
 **Get function**
 
-Get and set TLS/HTTPS info. POST parameters to the right are incorrect, use `cert` and `private_key` when posting.
+Get and set TLS/HTTPS info. POST parameters to the right are incorrect, use `cert` and
+`private_key` when posting.
 
 ```python
 >>> ssl.get()
@@ -485,7 +497,8 @@ Get and set TLS/HTTPS info. POST parameters to the right are incorrect, use `cer
 
 **Post function**
 
-Get and set TLS/HTTPS info. POST parameters to the right are incorrect, use `cert` and `private_key` when posting.
+Get and set TLS/HTTPS info. POST parameters to the right are incorrect, use `cert` and
+`private_key` when posting.
 
 ```python
 >>> ssl.post(python_version: str, source_directory: str, virtualenv_path: str, force_https: bool)
@@ -493,7 +506,8 @@ Get and set TLS/HTTPS info. POST parameters to the right are incorrect, use `cer
 
 **Delete function**
 
-Get and set TLS/HTTPS info. POST parameters to the right are incorrect use `cert` and `private_key` when posting.
+Get and set TLS/HTTPS info. POST parameters to the right are incorrect use `cert` and
+`private_key` when posting.
 
 ```python
 >>> ssl.delete()
@@ -503,10 +517,10 @@ Get and set TLS/HTTPS info. POST parameters to the right are incorrect use `cert
 
 **Parameters**
 
-* client
-* domain\_name
-  * str
-  * example: 'www.coogger.com'
+- client
+- domain_name
+  - str
+  - example: 'www.coogger.com'
 
 ```python
 >>> static_files = StaticFiles(client=client, domain_name: str)
@@ -532,10 +546,10 @@ Create a new static files mapping. \(webapp restart required\)
 
 **Parameters**
 
-* client
-* domain\_name
-  * str
-  * example: 'www.coogger.com'
+- client
+- domain_name
+  - str
+  - example: 'www.coogger.com'
 
 ```python
 >>> static_files_id = StaticFilesId(client=client, domain_name: str)
@@ -577,9 +591,6 @@ Remove a static files mapping. \(webapp restart required\)
 
 > If you like this work you can donate to me
 
-* BTC Address '1Hk9M9cSng2pziHtc3ak75Wegx9sx8NPwT'
-* LTC Address 'LeJheyL4assPejXTRhQX5LBu59KDW6bK32'
-* ETH Address '0x1baf218f8f0366e3e9ef8d2609ecfd51cd136715'
-
-
-
+- BTC Address '1Hk9M9cSng2pziHtc3ak75Wegx9sx8NPwT'
+- LTC Address 'LeJheyL4assPejXTRhQX5LBu59KDW6bK32'
+- ETH Address '0x1baf218f8f0366e3e9ef8d2609ecfd51cd136715'

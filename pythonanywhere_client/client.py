@@ -13,9 +13,7 @@ class Client:
         self.headers = dict(Authorization=f"Token {token}")
 
     def _create_api_uri(self, op, name, path, api_version="v0"):
-        return (
-            f"{self.base_uri}/api/{api_version}/user/{self.username}/{op}/{name}/{path}"
-        )
+        return f"{self.base_uri}/api/{api_version}/user/{self.username}/{op}/{name}/{path}"
 
     def _requests(self, method, op, name, path, data):
         uri = self._create_api_uri(op, name, path)

@@ -30,7 +30,9 @@ class ScheduleId:
         "Endpoints for scheduled tasks"
 
     @client_decorator(op="schedule", name="{self.id}")
-    def patch(self, command, enabled=True, interval="daily", hour=20, minute=0):
+    def patch(
+        self, command, enabled=True, interval="daily", hour=20, minute=0
+    ):
         "Endpoints for scheduled tasks"
 
     @client_decorator(op="schedule", name="{self.id}")
@@ -43,4 +45,6 @@ if __name__ == "__main__":
 
     client = Client(username="username", token="token")
     schedule = Schedule(client=client)
-    print(schedule.post(command="python3.6 /home/{username}/{file_path}").json())
+    print(
+        schedule.post(command="python3.6 /home/{username}/{file_path}").json()
+    )

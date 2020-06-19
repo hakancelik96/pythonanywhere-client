@@ -45,7 +45,9 @@ class GetLatestOutput:
         self.client = client
         self.id = id
 
-    @client_decorator(op="consoles", name="{self.id}", path="get_latest_output")
+    @client_decorator(
+        op="consoles", name="{self.id}", path="get_latest_output"
+    )
     def get(self):
         "Get the most recent output from the console (approximately 500 characters)."
 
